@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select Seats - Movie Ticket Booking</title>
+  <style>
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #333;
+      padding: 10px 20px;
+      color: white;
+    }
+    .navbar .logo { font-size: 20px; font-weight: bold; }
+    .nav-links { list-style: none; display: flex; margin: 0; padding: 0; }
+    .nav-links li { margin-left: 20px; }
+    .nav-links a, .reset-btn {
+      color: white;
+      text-decoration: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .nav-links a:hover, .reset-btn:hover { color: #ffcc00; }
+
+    /* Container */
+    .container { text-align: center; padding: 20px; }
+    h2 { margin-bottom: 10px; }
+    .movie-info { font-size: 18px; margin-bottom: 20px; }
+
+    /* Screen */
+    .screen {
+      width: 80%;
+      margin: 0 auto 20px;
+      padding: 10px;
+      background: #ccc;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    /* Seats grid */
+    .seats-grid {
+      display: grid;
+      grid-template-columns: repeat(10, 40px);
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .seat {
+      width: 40px;
+      height: 40px;
+      background: #eee;
+      border-radius: 5px;
+      line-height: 40px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .seat.available:hover { background: #28a745; color: white; }
+    .seat.booked { background: #d9534f; color: white; cursor: not-allowed; }
+    .seat.selected { background: #ffc107; color: white; }
+
+    /* Booking info */
+    .booking-info { margin-bottom: 20px; }
+    .book-btn {
+      background: #28a745;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .book-btn:hover { background: #218838; }
+
+    /* Virtual Ticket Popup */
+    #ticketPopup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    #ticket {
+      background: #222;
+      border: 2px dashed #ffc107;
+      width: 340px;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: left;
+      color: #fff;
+      position: relative;
+      animation: popIn 0.3s ease-in-out;
+    }
+    @keyframes popIn {
+      from { transform: scale(0.7); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    #ticket h3 {
+      text-align: center;
+      color: #ffc107;
+      margin-bottom: 15px;
+    }
+    #ticket p { margin: 8px 0; }
+
+    /* Close button */
+    .close-btn {
+      position: absolute;
+      top: 8px;
+      right: 12px;
+      font-size: 20px;
+      cursor: pointer;
+      color: #fff;
+    }
+    .close-btn:hover { color: #ff4444; }
+
+    /* Home button */
+    .home-btn {
+      display: block;
+      margin: 15px auto 0;
+      background: #007bff;
+      border: none;
+      padding: 10px 20px;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      text-align: center;
+    }
+    .home-btn:hover { background: #0056b3; }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="logo">🎬 MovieBooking</div>
+    <ul class="nav-links">
+      <li><a href="movies.html">Home</a></li>
+      <li><a href="cart.html">Cart</a></li>
+      <li><a href="bookings.html">Bookings</a></li>
+      <li><button class="reset-btn" onclick="resetBookings()">Reset</button></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <h2>Select Your Seats</h2>
+    <!-- Movie Info -->
+    <div class="movie-info">
+      Movie: <span id="movieTitle"></span> | 
+      Date: <span id="movieDate"></span> | 
+      Time: <span id="movieTime"></span>
+    </div>
+
+    <!-- Screen -->
+    <div class="screen">SCREEN</div>
+
+    <!-- Seats Grid -->
+    <div class="seats-grid" id="seatGrid"></div>
+
+    <!-- Booking Info -->
+    <div class="booking-info">
+      Selected Seats: <span id="totalSeats">0</span> | 
+      Total Price: ₹<span id="totalPrice">0</span>
+    </div>
+
+    <button class="book-btn" onclick="checkout()">Confirm Booking</button>
+  </div>
+
+  <!-- Ticket Popup -->
+  <div id="ticketPopup">
+    <div id="ticket">
+      <span class="close-btn" onclick="closeTicket()">✖</span>
+      <h3>🎟 Virtual Ticket 🎟</h3>
+      <p><strong>Movie:</strong> <span id="ticketMovie"></span></p>
+      <p><strong>Date:</strong> <span id="ticketDate"></span></p>
+      <p><strong>Time:</strong> <span id="ticketTime"></span></p>
+      <p><strong>Seats:</strong> <span id="ticketSeats"></span></p>
+      <p><strong>Booking ID:</strong> <span id="ticketId"></span></p>
+      <p><strong>Total Paid:</strong> ₹<span id="ticketPrice"></span></p>
+      <button class="home-btn" onclick="goHome()">Return to Home</button>
+    </div>
+  </div>
+
+  <script>
+    // Get URL parameters
+    const params = new URLSearchParams(window.location.search);
+    const movieName = params.get("movie") || "Unknown Movie";
+    const movieDate = params.get("date") || "Unknown Date";
+    const movieTime = params.get("time") || "Unknown Time";
+
+    document.getElementById("movieTitle").innerText = movieName;
+    document.getElementById("movieDate").innerText = movieDate;
+    document.getElementById("movieTime").innerText = movieTime;
+
+    const rows = 10; // A-J
+    const cols = 10; // 1-10
+    let selectedSeats = [];
+
+    // Load bookings for this movie + date + time
+    let bookings = JSON.parse(localStorage.getItem("bookings") || "[]");
+    let bookedSeats = bookings
+      .filter(b => b.movie === movieName && b.date === movieDate && b.time === movieTime)
+      .flatMap(b => b.seats);
+
+    const seatGrid = document.getElementById("seatGrid");
+
+    function generateSeats() {
+      seatGrid.innerHTML = "";
+      for (let r = 0; r < rows; r++) {
+        const rowLabel = String.fromCharCode(65 + r);
+        for (let c = 1; c <= cols; c++) {
+          const seatNum = rowLabel + c;
+          const seat = document.createElement("div");
+          seat.classList.add("seat");
+          seat.innerText = seatNum;
+
+          if (bookedSeats.includes(seatNum)) seat.classList.add("booked");
+          else {
+            seat.classList.add("available");
+            seat.onclick = () => toggleSeat(seat, seatNum);
+          }
+
+          seatGrid.appendChild(seat);
+        }
+      }
+      updateBookingInfo();
+    }
+
+    function toggleSeat(seat, seatNum) {
+      if (seat.classList.contains("selected")) {
+        seat.classList.remove("selected");
+        seat.classList.add("available");
+        selectedSeats = selectedSeats.filter(s => s !== seatNum);
+      } else {
+        seat.classList.remove("available");
+        seat.classList.add("selected");
+        selectedSeats.push(seatNum);
+      }
+      updateBookingInfo();
+    }
+
+    function updateBookingInfo() {
+      document.getElementById("totalSeats").innerText = selectedSeats.length;
+      document.getElementById("totalPrice").innerText = selectedSeats.length * 150;
+    }
+
+    function checkout() {
+      if (selectedSeats.length === 0) return alert("Select at least one seat!");
+
+      const bookingId = "BMS" + Math.floor(Math.random() * 1000000);
+      const newBooking = {
+        movie: movieName,
+        date: movieDate,
+        time: movieTime,
+        seats: selectedSeats,
+        bookingId,
+        totalPrice: selectedSeats.length * 150
+      };
+
+      bookings.push(newBooking);
+      localStorage.setItem("bookings", JSON.stringify(bookings));
+
+      // Show Virtual Ticket
+      document.getElementById("ticketMovie").innerText = newBooking.movie;
+      document.getElementById("ticketDate").innerText = newBooking.date;
+      document.getElementById("ticketTime").innerText = newBooking.time;
+      document.getElementById("ticketSeats").innerText = newBooking.seats.join(", ");
+      document.getElementById("ticketId").innerText = newBooking.bookingId;
+      document.getElementById("ticketPrice").innerText = newBooking.totalPrice;
+      document.getElementById("ticketPopup").style.display = "flex";
+
+      bookedSeats.push(...selectedSeats);
+      selectedSeats = [];
+      generateSeats();
+    }
+
+    function closeTicket() {
+      document.getElementById("ticketPopup").style.display = "none";
+    }
+
+    function goHome() {
+      window.location.href = "index.html";
+    }
+
+    function resetBookings() {
+      bookings = bookings.filter(b => !(b.movie === movieName && b.date === movieDate && b.time === movieTime));
+      localStorage.setItem("bookings", JSON.stringify(bookings));
+      bookedSeats = [];
+      selectedSeats = [];
+      document.getElementById("ticketPopup").style.display = "none"; 
+      generateSeats();
+    }
+
+    // Initial load
+    generateSeats();
+  </script>
+</body>
+</html>

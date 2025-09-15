@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart - MovieBooking</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f0f2f5;
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #2c3e50;
+      padding: 10px 20px;
+      color: white;
+    }
+    .navbar .logo { font-size: 24px; font-weight: bold; }
+    .nav-links { list-style: none; display: flex; gap: 15px; margin: 0; padding: 0; }
+    .nav-links li { display: inline; }
+    .nav-links a, .reset-btn {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .reset-btn:hover, .nav-links a:hover { text-decoration: underline; }
+
+    /* Container */
+    .container {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    h2 { text-align: center; margin-bottom: 20px; color: #34495e; }
+
+    /* Cart Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+    th { background-color: #3498db; color: white; }
+    td button {
+      padding: 5px 10px;
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    td button:hover { background-color: #c0392b; }
+
+    /* Total Price */
+    .total {
+      text-align: right;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    /* Checkout button */
+    .btn {
+      display: block;
+      width: 200px;
+      margin: 0 auto;
+      padding: 10px 20px;
+      background-color: #2ecc71;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .btn:hover { background-color: #27ae60; }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="logo">🎬 MovieBooking</div>
+    <ul class="nav-links">
+      <li><a href="movies.html">Home</a></li>
+      <li><a href="cart.html">Cart</a></li>
+      <li><a href="bookings.html">Bookings</a></li>
+      <li><button class="reset-btn" onclick="resetCart()">Reset</button></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <h2>Your Cart</h2>
+    <table id="cartTable">
+      <thead>
+        <tr>
+          <th>Movie</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Seats</th>
+          <th>Price</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Cart items will be populated here -->
+      </tbody>
+    </table>
+    <div class="total">Total Price: ₹<span id="totalPrice">0</span></div>
+    <button class="btn" onclick="checkoutAll()">Checkout All</button>
+  </div>
+
+  <script>
+    let bookings = JSON.parse(localStorage.getItem("bookings") || "[]");
+
+    function loadCart() {
+      const tbody = document.querySelector("#cartTable tbody");
+      tbody.innerHTML = "";
+      let totalPrice = 0;
+
+      bookings.forEach((b, index) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${b.movie}</td>
+          <td>${b.date || "-"}</td>
+          <td>${b.time || "-"}</td>
+          <td>${b.seats.join(", ")}</td>
+          <td>₹${b.totalPrice}</td>
+          <td><button onclick="removeBooking(${index})">Remove</button></td>
+        `;
+        tbody.appendChild(row);
+        totalPrice += b.totalPrice;
+      });
+
+      document.getElementById("totalPrice").innerText = totalPrice;
+    }
+
+    function removeBooking(index) {
+      bookings.splice(index, 1);
+      localStorage.setItem("bookings", JSON.stringify(bookings));
+      loadCart();
+    }
+
+    function resetCart() {
+      if (confirm("Are you sure you want to reset all bookings?")) {
+        bookings = [];
+        localStorage.setItem("bookings", JSON.stringify(bookings));
+        loadCart();
+      }
+    }
+
+    function checkoutAll() {
+      if (bookings.length === 0) return alert("Your cart is empty!");
+      alert("All bookings confirmed! You can view them in Bookings page.");
+      // Optionally, you can redirect to bookings.html
+      window.location.href = "bookings.html";
+    }
+
+    loadCart();
+  </script>
+</body>
+</html>

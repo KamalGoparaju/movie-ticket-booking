@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movies - Book Your Tickets</title>
+  <style>
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #333;
+      padding: 10px 20px;
+      color: white;
+    }
+
+    .navbar .logo {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links li {
+      margin-left: 20px;
+    }
+
+    .nav-links a,
+    .reset-btn {
+      color: white;
+      text-decoration: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .nav-links a:hover,
+    .reset-btn:hover {
+      color: #ffcc00;
+    }
+
+    /* Movies Section */
+    .movies-section {
+      text-align: center;
+      padding: 30px;
+    }
+
+    .section-title {
+      margin-bottom: 20px;
+      font-size: 28px;
+    }
+
+    .movie-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .movie-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      width: 200px;
+      text-align: center;
+      overflow: hidden;
+      transition: transform 0.2s;
+    }
+
+    .movie-card:hover {
+      transform: scale(1.05);
+    }
+
+    .movie-card img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+    }
+
+    .movie-card h3 {
+      margin: 10px 0;
+    }
+
+    .book-btn {
+      background: #28a745;
+      border: none;
+      padding: 10px;
+      width: 100%;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .book-btn:hover {
+      background: #218838;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="logo">🎬 MovieBooking</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="cart.html">Cart</a></li>
+      <li><a href="bookings.html">Bookings</a></li>
+      <li><button class="reset-btn" onclick="resetBookings()">Reset</button></li>
+    </ul>
+  </nav>
+
+  <!-- Movies Section -->
+  <section class="movies-section">
+    <h1 class="section-title">Available Movies</h1>
+    <div id="movieList" class="movie-grid">
+      <div class="movie-card">
+        <img src="https://images.pexels.com/photos/190867/pexels-photo-190867.jpeg" alt="Avengers">
+        <h3>Avengers</h3>
+        <button class="book-btn" onclick="location.href='seats.html?movie=Avengers'">Book Now</button>
+      </div>
+      <div class="movie-card">
+        <img src="https://images.pexels.com/photos/799157/pexels-photo-799157.jpeg" alt="Titanic">
+        <h3>Titanic</h3>
+        <button class="book-btn" onclick="location.href='seats.html?movie=Titanic'">Book Now</button>
+      </div>
+      <div class="movie-card">
+        <img src="https://images.pexels.com/photos/1117132/pexels-photo-1117132.jpeg" alt="Inception">
+        <h3>Inception</h3>
+        <button class="book-btn" onclick="location.href='seats.html?movie=Inception'">Book Now</button>
+      </div>
+      <div class="movie-card">
+        <img src="https://images.pexels.com/photos/1123446/pexels-photo-1123446.jpeg" alt="The Dark Knight">
+        <h3>The Dark Knight</h3>
+        <button class="book-btn" onclick="location.href='seats.html?movie=The+Dark+Knight'">Book Now</button>
+      </div>
+      <div class="movie-card">
+        <img src="https://images.pexels.com/photos/1309941/pexels-photo-1309941.jpeg" alt="The Lion King">
+        <h3>The Lion King</h3>
+        <button class="book-btn" onclick="location.href='seats.html?movie=The+Lion+King'">Book Now</button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function resetBookings() {
+      localStorage.removeItem("bookings");
+      alert("All bookings have been reset!");
+    }
+  </script>
+</body>
+</html>
