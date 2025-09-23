@@ -42,9 +42,10 @@
       background: #fff;
       border-radius: 10px;
       box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      text-align: center;
     }
 
-    h2 { text-align: center; margin-bottom: 20px; color: #34495e; }
+    h2 { margin-bottom: 20px; color: #34495e; }
 
     /* Cart Table */
     table {
@@ -73,6 +74,7 @@
       text-align: right;
       font-size: 18px;
       font-weight: bold;
+      margin-bottom: 20px;
     }
 
     /* Checkout button */
@@ -89,6 +91,13 @@
       cursor: pointer;
     }
     .btn:hover { background-color: #27ae60; }
+
+    /* Empty cart message */
+    #emptyMessage {
+      font-size: 20px;
+      color: #555;
+      margin-top: 40px;
+    }
   </style>
 </head>
 <body>
@@ -105,6 +114,7 @@
 
   <div class="container">
     <h2>Your Cart</h2>
+    <div id="emptyMessage" style="display: none;">Your cart is empty</div>
     <table id="cartTable">
       <thead>
         <tr>
@@ -129,8 +139,22 @@
 
     function loadCart() {
       const tbody = document.querySelector("#cartTable tbody");
+      const emptyMessage = document.getElementById("emptyMessage");
       tbody.innerHTML = "";
       let totalPrice = 0;
+
+      if (bookings.length === 0) {
+        document.getElementById("cartTable").style.display = "none";
+        document.querySelector(".total").style.display = "none";
+        document.querySelector(".btn").style.display = "none";
+        emptyMessage.style.display = "block";
+        return;
+      } else {
+        document.getElementById("cartTable").style.display = "table";
+        document.querySelector(".total").style.display = "block";
+        document.querySelector(".btn").style.display = "block";
+        emptyMessage.style.display = "none";
+      }
 
       bookings.forEach((b, index) => {
         const row = document.createElement("tr");
@@ -166,7 +190,6 @@
     function checkoutAll() {
       if (bookings.length === 0) return alert("Your cart is empty!");
       alert("All bookings confirmed! You can view them in Bookings page.");
-      // Optionally, you can redirect to bookings.html
       window.location.href = "bookings.html";
     }
 
@@ -174,4 +197,3 @@
   </script>
 </body>
 </html>
-
