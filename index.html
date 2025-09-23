@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Movies - Book Your Tickets</title>
   <style>
+    /* General Styles */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+    }
+
     /* Navbar */
     .navbar {
       display: flex;
@@ -44,26 +51,32 @@
     /* Movies Section */
     .movies-section {
       text-align: center;
-      padding: 30px;
+      padding: 30px 10px;
     }
     .section-title {
       margin-bottom: 20px;
       font-size: 28px;
     }
+
+    /* Movie Grid */
     .movie-grid {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 20px;
     }
+
     .movie-card {
+      flex: 1 1 200px;
+      max-width: 220px;
       background: white;
       border-radius: 10px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-      width: 200px;
       text-align: center;
       overflow: hidden;
       transition: transform 0.2s;
+      display: flex;
+      flex-direction: column;
       padding-bottom: 10px;
     }
     .movie-card:hover {
@@ -71,46 +84,55 @@
     }
     .movie-card img {
       width: 100%;
-      height: 300px;
-      object-fit: cover;
+      height: auto;
     }
     .movie-card h3 {
       margin: 10px 0;
     }
+
+    /* Center Date & Time dropdowns in movie card */
+    .movie-card select {
+      width: 80%;
+      padding: 5px;
+      margin: 5px auto;  /* Center horizontally */
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      display: block;    /* Ensure margin auto works */
+      text-align: center; /* Optional: center text inside dropdown */
+    }
+
+    /* Book Button */
     .book-btn {
       background: #28a745;
       border: none;
       padding: 10px;
-      width: 100%;
+      width: 90%;
+      margin: 5px auto 0;
       color: white;
       font-size: 16px;
       cursor: pointer;
-      margin-top: 5px;
+      border-radius: 5px;
     }
     .book-btn:hover {
       background: #218838;
     }
 
-    /* Dropdowns for dates and times */
-    .movie-card select {
-      width: 90%;
-      padding: 8px;
-      margin: 5px 0;
-      font-size: 16px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      outline: none;
-      cursor: pointer;
-      transition: 0.2s;
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .movie-grid {
+        gap: 15px;
+      }
     }
-    .movie-card select:hover {
-      border-color: #28a745;
-      box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+    @media (max-width: 480px) {
+      .movie-card {
+        flex: 1 1 100%;
+        max-width: 100%;
+      }
     }
-    .movie-card select:focus {
-      border-color: #218838;
-      box-shadow: 0 0 5px rgba(33, 136, 56, 0.7);
-    }
+    
+
+
   </style>
 </head>
 <body>
@@ -134,7 +156,6 @@
         <img src="https://m.media-amazon.com/images/M/MV5BODBhYTg1NGQtNGVmNS00ZTdiLThjYTYtZDFkNzRiNTZmNDZjXkEyXkFqcGc@._V1_.jpg" alt="Avengers">
         <h3>Avengers</h3>
         <select id="Avengers-date">
-          <option value="2025-09-24">Sep 24, 2025</option>
           <option value="2025-09-25">Sep 25, 2025</option>
           <option value="2025-09-26">Sep 26, 2025</option>
         </select>
@@ -152,15 +173,14 @@
         <img src="https://upload.wikimedia.org/wikipedia/en/1/18/Titanic_%281997_film%29_poster.png" alt="Titanic">
         <h3>Titanic</h3>
         <select id="Titanic-date">
-          <option value="2025-09-24">Sep 24, 2025</option>
           <option value="2025-09-25">Sep 25, 2025</option>
           <option value="2025-09-26">Sep 26, 2025</option>
         </select>
         <select id="Titanic-time">
-          <option value="11:00 AM">11:00 AM</option>
-          <option value="2:00 PM">2:00 PM</option>
-          <option value="7:00 PM">7:00 PM</option>
-          <option value="10:00 PM">10:00 PM</option>
+          <option value="10:00 AM">10:00 AM</option>
+          <option value="1:00 PM">1:00 PM</option>
+          <option value="6:00 PM">6:00 PM</option>
+          <option value="9:00 PM">9:00 PM</option>
         </select>
         <button class="book-btn" onclick="bookMovie('Titanic')">Book Now</button>
       </div>
@@ -170,15 +190,14 @@
         <img src="https://m.media-amazon.com/images/M/MV5BZjhkNjM0ZTMtNGM5MC00ZTQ3LTk3YmYtZTkzYzdiNWE0ZTA2XkEyXkFqcGc@._V1_.jpg" alt="Inception">
         <h3>Inception</h3>
         <select id="Inception-date">
-          <option value="2025-09-24">Sep 24, 2025</option>
           <option value="2025-09-25">Sep 25, 2025</option>
           <option value="2025-09-26">Sep 26, 2025</option>
         </select>
         <select id="Inception-time">
-          <option value="10:30 AM">10:30 AM</option>
-          <option value="1:30 PM">1:30 PM</option>
-          <option value="6:30 PM">6:30 PM</option>
-          <option value="9:30 PM">9:30 PM</option>
+          <option value="10:00 AM">10:00 AM</option>
+          <option value="1:00 PM">1:00 PM</option>
+          <option value="6:00 PM">6:00 PM</option>
+          <option value="9:00 PM">9:00 PM</option>
         </select>
         <button class="book-btn" onclick="bookMovie('Inception')">Book Now</button>
       </div>
@@ -188,15 +207,14 @@
         <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTfE_qrYMBZ_JB8om-34WGaZARhpX26yWRttqIDvn4_7l--UzX8mxKcPrc59IcvTpEA_G8gPA" alt="The Dark Knight">
         <h3>The Dark Knight</h3>
         <select id="TheDarkKnight-date">
-          <option value="2025-09-24">Sep 24, 2025</option>
           <option value="2025-09-25">Sep 25, 2025</option>
           <option value="2025-09-26">Sep 26, 2025</option>
         </select>
         <select id="TheDarkKnight-time">
-          <option value="11:30 AM">11:30 AM</option>
-          <option value="2:30 PM">2:30 PM</option>
-          <option value="7:30 PM">7:30 PM</option>
-          <option value="10:30 PM">10:30 PM</option>
+          <option value="10:00 AM">10:00 AM</option>
+          <option value="1:00 PM">1:00 PM</option>
+          <option value="6:00 PM">6:00 PM</option>
+          <option value="9:00 PM">9:00 PM</option>
         </select>
         <button class="book-btn" onclick="bookMovie('TheDarkKnight')">Book Now</button>
       </div>
@@ -206,7 +224,6 @@
         <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRu6K8z_pBKeeeG_ew9Xlk-JC0e4FEoE4Qx4nEpxP9dg88BuVze" alt="The Lion King">
         <h3>The Lion King</h3>
         <select id="TheLionKing-date">
-          <option value="2025-09-24">Sep 24, 2025</option>
           <option value="2025-09-25">Sep 25, 2025</option>
           <option value="2025-09-26">Sep 26, 2025</option>
         </select>
@@ -230,7 +247,6 @@
     function bookMovie(movie) {
       const date = document.getElementById(movie + "-date").value;
       const time = document.getElementById(movie + "-time").value;
-      // Redirect to seats.html with movie, date, and time
       location.href = `seats.html?movie=${encodeURIComponent(movie)}&date=${encodeURIComponent(date)}&time=${encodeURIComponent(time)}`;
     }
   </script>
