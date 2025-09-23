@@ -184,7 +184,8 @@
       <p><strong>Seats:</strong> <span id="ticketSeats"></span></p>
       <p><strong>Booking ID:</strong> <span id="ticketId"></span></p>
       <p><strong>Total Paid:</strong> ₹<span id="ticketPrice"></span></p>
-      <button class="home-btn" onclick="goHome()">Return to Home</button>
+      <button class="home-btn" onclick="goCart()">Go to Cart</button>
+
     </div>
   </div>
 
@@ -285,9 +286,11 @@
       document.getElementById("ticketPopup").style.display = "none";
     }
 
-    function goHome() {
-      window.location.href = "index.html";
-    }
+   function goCart() {
+    window.location.href = "cart.html";
+}
+
+    
 
     function resetBookings() {
       bookings = bookings.filter(b => !(b.movie === movieName && b.date === movieDate && b.time === movieTime));
@@ -303,4 +306,3 @@
   </script>
 </body>
 </html>
-
