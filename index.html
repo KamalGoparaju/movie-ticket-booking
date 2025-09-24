@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Movies - Book Your Tickets</title>
   <style>
-    /* General Styles */
+     /* General Styles */
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -58,16 +58,16 @@
       font-size: 28px;
     }
 
-    /* Movie Grid */
+    /* Movie Grid - 5 per row */
     .movie-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
       gap: 20px;
+      justify-items: center;
     }
 
     .movie-card {
-      flex: 1 1 200px;
+      width: 100%;
       max-width: 220px;
       background: white;
       border-radius: 10px;
@@ -94,12 +94,12 @@
     .movie-card select {
       width: 80%;
       padding: 5px;
-      margin: 5px auto;  /* Center horizontally */
+      margin: 5px auto;
       border-radius: 5px;
       border: 1px solid #ccc;
       font-size: 14px;
-      display: block;    /* Ensure margin auto works */
-      text-align: center; /* Optional: center text inside dropdown */
+      display: block;
+      text-align: center;
     }
 
     /* Book Button */
@@ -119,20 +119,21 @@
     }
 
     /* Responsive Adjustments */
+    @media (max-width: 1024px) {
+      .movie-grid {
+        grid-template-columns: repeat(3, 1fr); /* Tablets */
+      }
+    }
     @media (max-width: 768px) {
       .movie-grid {
-        gap: 15px;
+        grid-template-columns: repeat(2, 1fr); /* Small Tablets */
       }
     }
     @media (max-width: 480px) {
-      .movie-card {
-        flex: 1 1 100%;
-        max-width: 100%;
+      .movie-grid {
+        grid-template-columns: 1fr; /* Mobile */
       }
     }
-    
-
-
   </style>
 </head>
 <body>
@@ -151,6 +152,8 @@
   <section class="movies-section">
     <h1 class="section-title">Available Movies</h1>
     <div id="movieList" class="movie-grid">
+
+      <!-- Movie Template Start -->
       <!-- Avengers -->
       <div class="movie-card">
         <img src="https://m.media-amazon.com/images/M/MV5BODBhYTg1NGQtNGVmNS00ZTdiLThjYTYtZDFkNzRiNTZmNDZjXkEyXkFqcGc@._V1_.jpg" alt="Avengers">
@@ -235,6 +238,178 @@
         </select>
         <button class="book-btn" onclick="bookMovie('TheLionKing')">Book Now</button>
       </div>
+
+      <!-- Frozen -->
+      <div class="movie-card">
+        <img src="https://upload.wikimedia.org/wikipedia/en/0/05/Frozen_%282013_film%29_poster.jpg" alt="Frozen">
+        <h3>Frozen</h3>
+        <select id="Frozen-date">
+          <option value="2025-09-25">Sep 25, 2025</option>
+          <option value="2025-09-26">Sep 26, 2025</option>
+        </select>
+        <select id="Frozen-time">
+          <option value="10:00 AM">10:00 AM</option>
+          <option value="1:00 PM">1:00 PM</option>
+          <option value="6:00 PM">6:00 PM</option>
+          <option value="9:00 PM">9:00 PM</option>
+        </select>
+        <button class="book-btn" onclick="bookMovie('Frozen')">Book Now</button>
+      </div>
+
+      <!-- Avatar -->
+      <div class="movie-card">
+        <img src="https://upload.wikimedia.org/wikipedia/en/d/d6/Avatar_%282009_film%29_poster.jpg" alt="Avatar">
+        <h3>Avatar</h3>
+        <select id="Avatar-date">
+          <option value="2025-09-25">Sep 25, 2025</option>
+          <option value="2025-09-26">Sep 26, 2025</option>
+        </select>
+        <select id="Avatar-time">
+          <option value="10:00 AM">10:00 AM</option>
+          <option value="1:00 PM">1:00 PM</option>
+          <option value="6:00 PM">6:00 PM</option>
+          <option value="9:00 PM">9:00 PM</option>
+        </select>
+        <button class="book-btn" onclick="bookMovie('Avatar')">Book Now</button>
+      </div>
+
+      <!-- Interstellar -->
+      <div class="movie-card">
+        <img src="https://upload.wikimedia.org/wikipedia/en/b/bc/Interstellar_film_poster.jpg" alt="Interstellar">
+        <h3>Interstellar</h3>
+        <select id="Interstellar-date">
+          <option value="2025-09-25">Sep 25, 2025</option>
+          <option value="2025-09-26">Sep 26, 2025</option>
+        </select>
+        <select id="Interstellar-time">
+          <option value="10:00 AM">10:00 AM</option>
+          <option value="1:00 PM">1:00 PM</option>
+          <option value="6:00 PM">6:00 PM</option>
+          <option value="9:00 PM">9:00 PM</option>
+        </select>
+        <button class="book-btn" onclick="bookMovie('Interstellar')">Book Now</button>
+      </div>
+
+      <!-- Joker -->
+      <div class="movie-card">
+        <img src="https://upload.wikimedia.org/wikipedia/en/e/e1/Joker_%282019_film%29_poster.jpg" alt="Joker">
+        <h3>Joker</h3>
+        <select id="Joker-date">
+          <option value="2025-09-25">Sep 25, 2025</option>
+          <option value="2025-09-26">Sep 26, 2025</option>
+        </select>
+        <select id="Joker-time">
+          <option value="10:00 AM">10:00 AM</option>
+          <option value="1:00 PM">1:00 PM</option>
+          <option value="6:00 PM">6:00 PM</option>
+          <option value="9:00 PM">9:00 PM</option>
+        </select>
+        <button class="book-btn" onclick="bookMovie('Joker')">Book Now</button>
+      </div>
+
+      <!-- Toy Story -->
+      <div class="movie-card">
+        <img src="https://upload.wikimedia.org/wikipedia/en/1/13/Toy_Story.jpg" alt="Toy Story">
+        <h3>Toy Story</h3>
+        <select id="ToyStory-date">
+          <option value="2025-09-25">Sep 25, 2025</option>
+          <option value="2025-09-26">Sep 26, 2025</option>
+        </select>
+        <select id="ToyStory-time">
+          <option value="10:00 AM">10:00 AM</option>
+          <option value="1:00 PM">1:00 PM</option>
+          <option value="6:00 PM">6:00 PM</option>
+          <option value="9:00 PM">9:00 PM</option>
+        </select>
+        <button class="book-btn" onclick="bookMovie('ToyStory')">Book Now</button>
+      </div>
+
+      <!-- Spider-Man -->
+      <div class="movie-card">
+        <img src="https://upload.wikimedia.org/wikipedia/en/f/f9/Spider-Man_Homecoming_poster.jpg" alt="Spider-Man">
+        <h3>Spider-Man</h3>
+        <select id="SpiderMan-date">
+          <option value="2025-09-25">Sep 25, 2025</option>
+          <option value="2025-09-26">Sep 26, 2025</option>
+        </select>
+        <select id="SpiderMan-time">
+          <option value="10:00 AM">10:00 AM</option>
+          <option value="1:00 PM">1:00 PM</option>
+          <option value="6:00 PM">6:00 PM</option>
+          <option value="9:00 PM">9:00 PM</option>
+        </select>
+        <button class="book-btn" onclick="bookMovie('SpiderMan')">Book Now</button>
+      </div>
+
+      <!-- Black Panther -->
+      <div class="movie-card">
+        <img src="https://m.media-amazon.com/images/M/MV5BMTg1MTY2MjYzNV5BMl5BanBnXkFtZTgwMTc4NTMwNDI@._V1_.jpg" alt="Black Panther">
+        <h3>Black Panther</h3>
+        <select id="BlackPanther-date">
+          <option value="2025-09-25">Sep 25, 2025</option>
+          <option value="2025-09-26">Sep 26, 2025</option>
+        </select>
+        <select id="BlackPanther-time">
+          <option value="10:00 AM">10:00 AM</option>
+          <option value="1:00 PM">1:00 PM</option>
+          <option value="6:00 PM">6:00 PM</option>
+          <option value="9:00 PM">9:00 PM</option>
+        </select>
+        <button class="book-btn" onclick="bookMovie('BlackPanther')">Book Now</button>
+      </div>
+
+      <!-- Finding Nemo -->
+      <div class="movie-card">
+        <img src="https://upload.wikimedia.org/wikipedia/en/2/29/Finding_Nemo.jpg" alt="Finding Nemo">
+        <h3>Finding Nemo</h3>
+        <select id="FindingNemo-date">
+          <option value="2025-09-25">Sep 25, 2025</option>
+          <option value="2025-09-26">Sep 26, 2025</option>
+        </select>
+        <select id="FindingNemo-time">
+          <option value="10:00 AM">10:00 AM</option>
+          <option value="1:00 PM">1:00 PM</option>
+          <option value="6:00 PM">6:00 PM</option>
+          <option value="9:00 PM">9:00 PM</option>
+        </select>
+        <button class="book-btn" onclick="bookMovie('FindingNemo')">Book Now</button>
+      </div>
+
+      <!-- Minions -->
+      <div class="movie-card">
+        <img src="https://a.ltrbxd.com/resized/film-poster/1/5/0/5/4/1/150541-minions-0-230-0-345-crop.jpg?v=5d8a2bb837" alt="Minions">
+        <h3>Minions</h3>
+        <select id="Minions-date">
+          <option value="2025-09-25">Sep 25, 2025</option>
+          <option value="2025-09-26">Sep 26, 2025</option>
+        </select>
+        <select id="Minions-time">
+          <option value="10:00 AM">10:00 AM</option>
+          <option value="1:00 PM">1:00 PM</option>
+          <option value="6:00 PM">6:00 PM</option>
+          <option value="9:00 PM">9:00 PM</option>
+        </select>
+        <button class="book-btn" onclick="bookMovie('Minions')">Book Now</button>
+      </div>
+
+      <!-- Harry Potter -->
+<div class="movie-card">
+  <img src="https://booksandyou.in/cdn/shop/files/HarryPotterBoxSetCursedChild_beb3a56c-0d20-4c82-9267-69c684b534e6.jpg?v=1696398244&width=1445" alt="Harry Potter">
+  <h3>Harry Potter</h3>
+  <select id="HarryPotter-date">
+    <option value="2025-09-25">Sep 25, 2025</option>
+    <option value="2025-09-26">Sep 26, 2025</option>
+  </select>
+  <select id="HarryPotter-time">
+    <option value="10:00 AM">10:00 AM</option>
+    <option value="1:00 PM">1:00 PM</option>
+    <option value="6:00 PM">6:00 PM</option>
+    <option value="9:00 PM">9:00 PM</option>
+  </select>
+  <button class="book-btn" onclick="bookMovie('HarryPotter')">Book Now</button>
+</div>
+
+
     </div>
   </section>
 
