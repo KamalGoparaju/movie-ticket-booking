@@ -15,14 +15,14 @@
     /* Navbar */
     .navbar {
       position: sticky;   /* Keeps it in view while scrolling */
-      top: 0;             /* Stick to the very top */
-      z-index: 1000;      /* Ensure it stays above other content */
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #2c3e50;
-      padding: 10px 20px;
-      color: white;
+  top: 0;             /* Stick to the very top */
+  z-index: 1000;      /* Ensure it stays above other content */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #2c3e50;
+  padding: 10px 20px;
+  color: white;
     }
     .navbar .logo {
       font-size: 20px;
@@ -95,7 +95,7 @@
 
     /* Center Date & Time dropdowns in movie card */
     .movie-card select {
-      width: 80%;
+      width: 85%;
       padding: 5px;
       margin: 5px auto;
       border-radius: 5px;
@@ -142,7 +142,7 @@
 <body>
   <!-- Navigation Bar -->
   <nav class="navbar">
-    <div class="logo">🎬 Movie Booking</div>
+    <div class="logo">🎬 MovieBooking</div>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="cart.html">Cart</a></li>
@@ -161,10 +161,7 @@
       <div class="movie-card">
         <img src="https://m.media-amazon.com/images/M/MV5BODBhYTg1NGQtNGVmNS00ZTdiLThjYTYtZDFkNzRiNTZmNDZjXkEyXkFqcGc@._V1_.jpg" alt="Avengers">
         <h3>Avengers</h3>
-        <select id="Avengers-date">
-          <option value="2025-09-25">Sep 25, 2025</option>
-          <option value="2025-09-26">Sep 26, 2025</option>
-        </select>
+        <select id="Avengers-date" data-date></select>
         <select id="Avengers-time">
           <option value="10:00 AM">10:00 AM</option>
           <option value="1:00 PM">1:00 PM</option>
@@ -178,10 +175,7 @@
       <div class="movie-card">
         <img src="https://upload.wikimedia.org/wikipedia/en/1/18/Titanic_%281997_film%29_poster.png" alt="Titanic">
         <h3>Titanic</h3>
-        <select id="Titanic-date">
-          <option value="2025-09-25">Sep 25, 2025</option>
-          <option value="2025-09-26">Sep 26, 2025</option>
-        </select>
+        <select id="Titanic-date" data-date></select>
         <select id="Titanic-time">
           <option value="10:00 AM">10:00 AM</option>
           <option value="1:00 PM">1:00 PM</option>
@@ -195,10 +189,7 @@
       <div class="movie-card">
         <img src="https://m.media-amazon.com/images/M/MV5BZjhkNjM0ZTMtNGM5MC00ZTQ3LTk3YmYtZTkzYzdiNWE0ZTA2XkEyXkFqcGc@._V1_.jpg" alt="Inception">
         <h3>Inception</h3>
-        <select id="Inception-date">
-          <option value="2025-09-25">Sep 25, 2025</option>
-          <option value="2025-09-26">Sep 26, 2025</option>
-        </select>
+        <select id="Inception-date" data-date></select>
         <select id="Inception-time">
           <option value="10:00 AM">10:00 AM</option>
           <option value="1:00 PM">1:00 PM</option>
@@ -212,10 +203,7 @@
       <div class="movie-card">
         <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTfE_qrYMBZ_JB8om-34WGaZARhpX26yWRttqIDvn4_7l--UzX8mxKcPrc59IcvTpEA_G8gPA" alt="The Dark Knight">
         <h3>The Dark Knight</h3>
-        <select id="TheDarkKnight-date">
-          <option value="2025-09-25">Sep 25, 2025</option>
-          <option value="2025-09-26">Sep 26, 2025</option>
-        </select>
+        <select id="TheDarkKnight-date" data-date></select>
         <select id="TheDarkKnight-time">
           <option value="10:00 AM">10:00 AM</option>
           <option value="1:00 PM">1:00 PM</option>
@@ -229,10 +217,7 @@
       <div class="movie-card">
         <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRu6K8z_pBKeeeG_ew9Xlk-JC0e4FEoE4Qx4nEpxP9dg88BuVze" alt="The Lion King">
         <h3>The Lion King</h3>
-        <select id="TheLionKing-date">
-          <option value="2025-09-25">Sep 25, 2025</option>
-          <option value="2025-09-26">Sep 26, 2025</option>
-        </select>
+        <select id="TheLionKing-date" data-date></select>
         <select id="TheLionKing-time">
           <option value="10:00 AM">10:00 AM</option>
           <option value="1:00 PM">1:00 PM</option>
@@ -246,10 +231,7 @@
       <div class="movie-card">
         <img src="https://upload.wikimedia.org/wikipedia/en/0/05/Frozen_%282013_film%29_poster.jpg" alt="Frozen">
         <h3>Frozen</h3>
-        <select id="Frozen-date">
-          <option value="2025-09-25">Sep 25, 2025</option>
-          <option value="2025-09-26">Sep 26, 2025</option>
-        </select>
+        <select id="Frozen-date" data-date></select>
         <select id="Frozen-time">
           <option value="10:00 AM">10:00 AM</option>
           <option value="1:00 PM">1:00 PM</option>
@@ -263,10 +245,7 @@
       <div class="movie-card">
         <img src="https://upload.wikimedia.org/wikipedia/en/d/d6/Avatar_%282009_film%29_poster.jpg" alt="Avatar">
         <h3>Avatar</h3>
-        <select id="Avatar-date">
-          <option value="2025-09-25">Sep 25, 2025</option>
-          <option value="2025-09-26">Sep 26, 2025</option>
-        </select>
+        <select id="Avatar-date" data-date></select>
         <select id="Avatar-time">
           <option value="10:00 AM">10:00 AM</option>
           <option value="1:00 PM">1:00 PM</option>
@@ -280,10 +259,7 @@
       <div class="movie-card">
         <img src="https://upload.wikimedia.org/wikipedia/en/b/bc/Interstellar_film_poster.jpg" alt="Interstellar">
         <h3>Interstellar</h3>
-        <select id="Interstellar-date">
-          <option value="2025-09-25">Sep 25, 2025</option>
-          <option value="2025-09-26">Sep 26, 2025</option>
-        </select>
+        <select id="Interstellar-date" data-date></select>
         <select id="Interstellar-time">
           <option value="10:00 AM">10:00 AM</option>
           <option value="1:00 PM">1:00 PM</option>
@@ -297,10 +273,7 @@
       <div class="movie-card">
         <img src="https://upload.wikimedia.org/wikipedia/en/e/e1/Joker_%282019_film%29_poster.jpg" alt="Joker">
         <h3>Joker</h3>
-        <select id="Joker-date">
-          <option value="2025-09-25">Sep 25, 2025</option>
-          <option value="2025-09-26">Sep 26, 2025</option>
-        </select>
+        <select id="Joker-date" data-date></select>
         <select id="Joker-time">
           <option value="10:00 AM">10:00 AM</option>
           <option value="1:00 PM">1:00 PM</option>
@@ -314,10 +287,7 @@
       <div class="movie-card">
         <img src="https://upload.wikimedia.org/wikipedia/en/1/13/Toy_Story.jpg" alt="Toy Story">
         <h3>Toy Story</h3>
-        <select id="ToyStory-date">
-          <option value="2025-09-25">Sep 25, 2025</option>
-          <option value="2025-09-26">Sep 26, 2025</option>
-        </select>
+        <select id="ToyStory-date" data-date></select>
         <select id="ToyStory-time">
           <option value="10:00 AM">10:00 AM</option>
           <option value="1:00 PM">1:00 PM</option>
@@ -331,10 +301,7 @@
       <div class="movie-card">
         <img src="https://upload.wikimedia.org/wikipedia/en/f/f9/Spider-Man_Homecoming_poster.jpg" alt="Spider-Man">
         <h3>Spider-Man</h3>
-        <select id="SpiderMan-date">
-          <option value="2025-09-25">Sep 25, 2025</option>
-          <option value="2025-09-26">Sep 26, 2025</option>
-        </select>
+        <select id="SpiderMan-date" data-date></select>
         <select id="SpiderMan-time">
           <option value="10:00 AM">10:00 AM</option>
           <option value="1:00 PM">1:00 PM</option>
@@ -348,10 +315,7 @@
       <div class="movie-card">
         <img src="https://m.media-amazon.com/images/M/MV5BMTg1MTY2MjYzNV5BMl5BanBnXkFtZTgwMTc4NTMwNDI@._V1_.jpg" alt="Black Panther">
         <h3>Black Panther</h3>
-        <select id="BlackPanther-date">
-          <option value="2025-09-25">Sep 25, 2025</option>
-          <option value="2025-09-26">Sep 26, 2025</option>
-        </select>
+        <select id="BlackPanther-date" data-date></select>
         <select id="BlackPanther-time">
           <option value="10:00 AM">10:00 AM</option>
           <option value="1:00 PM">1:00 PM</option>
@@ -365,10 +329,7 @@
       <div class="movie-card">
         <img src="https://upload.wikimedia.org/wikipedia/en/2/29/Finding_Nemo.jpg" alt="Finding Nemo">
         <h3>Finding Nemo</h3>
-        <select id="FindingNemo-date">
-          <option value="2025-09-25">Sep 25, 2025</option>
-          <option value="2025-09-26">Sep 26, 2025</option>
-        </select>
+        <select id="FindingNemo-date" data-date></select>
         <select id="FindingNemo-time">
           <option value="10:00 AM">10:00 AM</option>
           <option value="1:00 PM">1:00 PM</option>
@@ -382,10 +343,7 @@
       <div class="movie-card">
         <img src="https://a.ltrbxd.com/resized/film-poster/1/5/0/5/4/1/150541-minions-0-230-0-345-crop.jpg?v=5d8a2bb837" alt="Minions">
         <h3>Minions</h3>
-        <select id="Minions-date">
-          <option value="2025-09-25">Sep 25, 2025</option>
-          <option value="2025-09-26">Sep 26, 2025</option>
-        </select>
+        <select id="Minions-date" data-date></select>
         <select id="Minions-time">
           <option value="10:00 AM">10:00 AM</option>
           <option value="1:00 PM">1:00 PM</option>
@@ -399,10 +357,7 @@
 <div class="movie-card">
   <img src="https://booksandyou.in/cdn/shop/files/HarryPotterBoxSetCursedChild_beb3a56c-0d20-4c82-9267-69c684b534e6.jpg?v=1696398244&width=1445" alt="Harry Potter">
   <h3>Harry Potter</h3>
-  <select id="HarryPotter-date">
-    <option value="2025-09-25">Sep 25, 2025</option>
-    <option value="2025-09-26">Sep 26, 2025</option>
-  </select>
+  <select id="HarryPotter-date" data-date></select>
   <select id="HarryPotter-time">
     <option value="10:00 AM">10:00 AM</option>
     <option value="1:00 PM">1:00 PM</option>
@@ -416,6 +371,7 @@
     </div>
   </section>
 
+
   <script>
     function resetBookings() {
       localStorage.removeItem("bookings");
@@ -427,9 +383,36 @@
       const time = document.getElementById(movie + "-time").value;
       location.href = `seats.html?movie=${encodeURIComponent(movie)}&date=${encodeURIComponent(date)}&time=${encodeURIComponent(time)}`;
     }
+
+     function generateDates() {
+      const today = new Date();
+      const dateOptions = [];
+      for (let i = 0; i < 5; i++) {
+        const date = new Date(today);
+        date.setDate(today.getDate() + i);
+
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+
+        const optionValue = `${year}-${month}-${day}`;
+
+        const displayDate = date.toLocaleDateString(undefined, {
+          month: 'short',
+          day: 'numeric',
+          year: 'numeric'
+        });
+
+        dateOptions.push(`<option value="${optionValue}">${displayDate}</option>`);
+      }
+
+      const dateSelects = document.querySelectorAll('select[data-date]');
+      dateSelects.forEach(select => {
+        select.innerHTML = dateOptions.join('');
+      });
+    }
+
+    window.addEventListener("DOMContentLoaded", generateDates);
   </script>
 </body>
 </html>
-
-
-
